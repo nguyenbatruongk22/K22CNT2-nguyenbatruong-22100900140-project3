@@ -1,4 +1,4 @@
-package com.javatpoint.dao;
+package springmvc.com.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.javatpoint.beans.Emp;
 
-public class EmpDao {
+public class Empdao {
     private JdbcTemplate template;
 
     public void setTemplate(JdbcTemplate template) {
@@ -18,13 +18,13 @@ public class EmpDao {
     }
 
     // Thêm nhân viên mới
-    public int save(Emp p) {
+    public int save(Empdao p) {
         String sql = "INSERT INTO Emp99 (name, salary, designation) VALUES (?, ?, ?)";
         return template.update(sql, p.getName(), p.getSalary(), p.getDesignation());
     }
 
     // Cập nhật thông tin nhân viên
-    public int update(Emp p) {
+    public int update(Empdao p) {
         String sql = "UPDATE Emp99 SET name=?, salary=?, designation=? WHERE id=?";
         return template.update(sql, p.getName(), p.getSalary(), p.getDesignation(), p.getId());
     }
@@ -36,13 +36,13 @@ public class EmpDao {
     }
 
     // Lấy thông tin nhân viên theo ID
-    public Emp getEmpById(int id) {
+    public Empdao getEmpById(int id) {
         String sql = "SELECT * FROM Emp99 WHERE id=?";
         return template.queryForObject(sql, new BeanPropertyRowMapper<>(Emp.class), id);
     }
 
     // Lấy danh sách tất cả nhân viên
-    public List<Emp> getEmployees() {
+    public List<Empdao> getEmployees() {
         String sql = "SELECT * FROM Emp99";
         return template.query(sql, new RowMapper<Emp>() {
             public Emp mapRow(ResultSet rs, int rowNum) throws SQLException {
