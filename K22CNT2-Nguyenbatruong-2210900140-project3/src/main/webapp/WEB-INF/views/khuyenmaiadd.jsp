@@ -51,7 +51,7 @@
     </style>
 </head>
 <body>
-    <jsp:include page="../menu.jsp" />
+  
 
     <div class="container">
         <h2 style="text-align: center;">Thêm Khuyến Mãi</h2>
@@ -64,10 +64,10 @@
             <textarea id="moTa" name="moTa" rows="4" required></textarea>
 
             <label for="ngayBatDau">Ngày Bắt Đầu:</label>
-            <input type="date" id="ngayBatDau" name="ngayBatDau" required>
+            <input type="text" id="ngayBatDau" name="ngayBatDau" required>
 
             <label for="ngayKetThuc">Ngày Kết Thúc:</label>
-            <input type="date" id="ngayKetThuc" name="ngayKetThuc" required>
+            <input type="text" id="ngayKetThuc" name="ngayKetThuc" required>
 
             <div class="buttons">
                 <button type="submit" class="btn btn-save">Lưu</button>

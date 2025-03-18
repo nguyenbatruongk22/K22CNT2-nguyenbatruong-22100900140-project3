@@ -51,7 +51,7 @@
     </style>
 </head>
 <body>
-    <jsp:include page="../menu.jsp" />
+  
 
     <div class="container">
         <h2 style="text-align: center;">Chỉnh Sửa Khuyến Mãi</h2>

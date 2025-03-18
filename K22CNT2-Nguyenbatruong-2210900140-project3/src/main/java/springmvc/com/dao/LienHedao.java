@@ -1,41 +1,61 @@
 package springmvc.com.dao;
 
-import org.springframework.stereotype.Repository;
-import springmvc.com.beans.LienHe;
-import springmvc.com.dao.LienHeDAO;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import springmvc.com.beans.LienHe;
 
-@Repository
-public class LienHeDAOImpl implements LienHeDAO {
+public class LienHedao {
+    private JdbcTemplate template;
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    @Override
-    public void save(LienHe lienHe) {
-        entityManager.persist(lienHe);
+    public void setTemplate(JdbcTemplate template) {
+        this.template = template;
     }
 
-    @Override
-    public void update(LienHe lienHe) {
-        entityManager.merge(lienHe);
+    // Thêm mới liên hệ
+    public int save(LienHe lh) {
+        String sql = "INSERT INTO lienhe (ho_ten, email, so_dien_thoai, noi_dung, ngay_gui) VALUES (?, ?, ?, ?, ?)";
+        return template.update(sql, lh.getHoTen(), lh.getEmail(), lh.getSoDienThoai(), lh.getNoiDung(), lh.getNgayGui());
     }
 
-    @Override
-    public void delete(LienHe lienHe) {
-        entityManager.remove(lienHe);
+    // Cập nhật thông tin liên hệ
+    public int update(LienHe lh) {
+        String sql = "UPDATE lienhe SET ho_ten=?, email=?, so_dien_thoai=?, noi_dung=?, ngay_gui=? WHERE id=?";
+        return template.update(sql, lh.getHoTen(), lh.getEmail(), lh.getSoDienThoai(), lh.getNoiDung(), lh.getNgayGui(), lh.getId());
     }
 
-    @Override
-    public LienHe findById(int id) {
-        return entityManager.find(LienHe.class, id);
+    // Xóa liên hệ theo ID
+    public int delete(int id) {
+        String sql = "DELETE FROM lienhe WHERE id=?";
+        return template.update(sql, id);
     }
 
-    @Override
-    public List<LienHe> findAll() {
-        return entityManager.createQuery("FROM LienHe", LienHe.class).getResultList();
+    // Lấy danh sách tất cả liên hệ
+    public List<LienHe> getAll() {
+        String sql = "SELECT * FROM lienhe";
+        return template.query(sql, new RowMapper<LienHe>() {
+            @Override
+            public LienHe mapRow(ResultSet rs, int rowNum) throws SQLException {
+                LienHe lh = new LienHe();
+                lh.setId(rs.getInt("id"));
+                lh.setHoTen(rs.getString("ho_ten"));
+                lh.setEmail(rs.getString("email"));
+                lh.setSoDienThoai(rs.getString("so_dien_thoai"));
+                lh.setNoiDung(rs.getString("noi_dung"));
+                // Chuyển đổi TIMESTAMP sang String
+                java.sql.Timestamp ngayGui = rs.getTimestamp("ngay_gui");
+                lh.setNgayGui(ngayGui != null ? ngayGui.toString() : null);
+                return lh;
+            }
+        });
+    }
+
+    // Lấy liên hệ theo ID
+    public LienHe getById(int id) {
+        String sql = "SELECT * FROM lienhe WHERE id=?";
+        return template.queryForObject(sql, new Object[]{id}, new BeanPropertyRowMapper<>(LienHe.class));
     }
 }

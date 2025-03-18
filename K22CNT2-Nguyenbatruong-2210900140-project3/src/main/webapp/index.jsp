@@ -35,8 +35,8 @@
        <li><a href="trangchucontroller">Trang chủ</a></li>
         <li><a href="thucdon">Thực đơn</a></li>
         <li><a href="khuyenmai">Khuyến mãi</a></li>
-       <li><a href="hethongcuahang">Hệ thống cửa hàng</a></li>
-        <li><a href="lienhe.java">Liên hệ</a></li>
+       <li><a href="hethongcuahang/hethongcuahanglist">Hệ thống cửa hàng</a></li>
+        <li><a href="lienhe">Liên hệ</a></li>
     </nav>
     <div class="banner">
         <img src="https://www.highlandscoffee.com.vn/vnt_upload/news/07_2019/HCO-Tin_tuYYc-BANNER-NEWS-740X314.jpg" alt="Banner">

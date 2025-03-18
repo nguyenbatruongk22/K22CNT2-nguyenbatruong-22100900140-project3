@@ -1,19 +1,25 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Danh Sách Cửa Hàng</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
+    <title>Danh Sách Hệ Thống Cửa Hàng</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            text-align: center;
             margin-top: 20px;
         }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
         table, th, td {
-            border: 1px solid black;
+            border: 1px solid #ccc;
         }
         th, td {
             padding: 10px;
@@ -21,35 +27,48 @@
         }
         th {
             background-color: #c8102e;
-            color: white;
+            color: #fff;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
         }
     </style>
 </head>
 <body>
-    <jsp:include page="../menu.jsp" />
-
-    <h2 style="text-align: center; margin-top: 20px;">Danh Sách Cửa Hàng</h2>
-    
-    <a href="${pageContext.request.contextPath}/hethongcuahang/add" style="display: block; text-align: center; margin-bottom: 10px; text-decoration: none; background: #8b0000; color: white; padding: 10px; width: 200px; margin: auto; border-radius: 5px;">Thêm Cửa Hàng</a>
-
+    <h2>Danh Sách Hệ Thống Cửa Hàng</h2>
     <table>
-        <tr>
-            <th>Tên Cửa Hàng</th>
-            <th>Địa Chỉ</th>
-            <th>Số Điện Thoại</th>
-            <th>Hành Động</th>
-        </tr>
-        <c:forEach var="cuaHang" items="${listCuaHang}">
+        <thead>
             <tr>
-                <td>${cuaHang.tenCuaHang}</td>
-                <td>${cuaHang.diaChi}</td>
-                <td>${cuaHang.soDienThoai}</td>
-                <td>
-                    <a href="${pageContext.request.contextPath}/hethongcuahang/edit?id=${cuaHang.id}">Sửa</a> |
-                    <a href="${pageContext.request.contextPath}/hethongcuahang/delete?id=${cuaHang.id}" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
-                </td>
+                <th>ID</th>
+                <th>Tên Cửa Hàng</th>
+                <th>Địa Chỉ</th>
+                <th>Số Điện Thoại</th>
+                <th>Giờ Mở Cửa</th>
+                <th>Giờ Đóng Cửa</th>
+                <th>Hành Động</th>
             </tr>
-        </c:forEach>
+        </thead>
+        <tbody>
+            <c:forEach var="ht" items="${heThongCuaHangList}">
+                <tr>
+                    <td>${ht.id}</td>
+                    <td>${ht.tenCuaHang}</td>
+                    <td>${ht.diaChi}</td>
+                    <td>${ht.soDienThoai}</td>
+                    <td>${ht.gioMoCua}</td>
+                    <td>${ht.gioDongCua}</td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/hethongcuahang/edit/${ht.id}">Sửa</a> |
+                       <a href="${pageContext.request.contextPath}/hethongcuahang/delete/${ht.id}" onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
+
+                    </td>
+                </tr>
+            </c:forEach>
+        </tbody>
     </table>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="${pageContext.request.contextPath}/hethongcuahang/hethongcuahangadd" style="background: #8b0000; color: #fff; padding: 10px 20px; border-radius: 5px;">Thêm Cửa Hàng</a>
+    </div>
 </body>
 </html>

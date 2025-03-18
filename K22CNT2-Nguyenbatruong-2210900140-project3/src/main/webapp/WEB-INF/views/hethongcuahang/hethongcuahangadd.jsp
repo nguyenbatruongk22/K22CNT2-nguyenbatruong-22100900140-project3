@@ -56,7 +56,7 @@
     <div class="container">
         <h2 style="text-align: center;">Thêm Cửa Hàng Mới</h2>
         
-        <form action="${pageContext.request.contextPath}/hethongcuahang/add" method="post">
+        <form action="${pageContext.request.contextPath}/hethongcuahang/save" method="post">
             <label for="tenCuaHang">Tên Cửa Hàng:</label>
             <input type="text" id="tenCuaHang" name="tenCuaHang" required>
 
@@ -67,11 +67,14 @@
             <input type="tel" id="soDienThoai" name="soDienThoai" required>
 
             <label for="gioMoCua">Giờ Mở Cửa:</label>
-            <input type="text" id="gioMoCua" name="gioMoCua" placeholder="Ví dụ: 7:00 - 22:00" required>
+            <input type="text" id="gioMoCua" name="gioMoCua" required>
+            
+             <label for="gioDongCua">Giờ Đóng Cửa:</label>
+            <input type="text" id="gioDongCua" name="gioDongCua" required>
 
             <div class="buttons">
                 <button type="submit" class="btn btn-save">Lưu</button>
-                <a href="${pageContext.request.contextPath}/hethongcuahang/list" class="btn btn-cancel">Hủy</a>
+                <a href="${pageContext.request.contextPath}/hethongcuahang/hethongcuahanglist" class="btn btn-cancel">Hủy</a>
             </div>
         </form>
     </div>

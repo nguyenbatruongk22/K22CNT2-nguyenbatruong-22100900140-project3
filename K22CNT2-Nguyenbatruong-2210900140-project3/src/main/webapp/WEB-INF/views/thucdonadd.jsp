@@ -13,15 +13,15 @@
         <table>
             <tr>
                 <td>Tên món:</td>
-                <td><form:input path="tenMon" /></td>
+                <td><input type="text"  name="tenMon" /></td>
             </tr>
             <tr>
                 <td>Hình ảnh:</td>
-                <td><input type="file" name="fileHinhAnh" /></td>
+                <td><input type="url" name="fileHinhAnh" /></td>
             </tr>
             <tr>
                 <td>Mô tả:</td>
-                <td><form:textarea path="moTa" /></td>
+                <td><input type="text" path="moTa" /></td>
             </tr>
             <tr>
                 <td colspan="2">

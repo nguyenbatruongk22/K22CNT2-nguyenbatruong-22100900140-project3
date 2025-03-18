@@ -57,7 +57,7 @@
     </style>
 </head>
 <body>
-    <jsp:include page="../menu.jsp" />
+   
 
     <div class="container">
         <h2>Danh Sách Khuyến Mãi</h2>
