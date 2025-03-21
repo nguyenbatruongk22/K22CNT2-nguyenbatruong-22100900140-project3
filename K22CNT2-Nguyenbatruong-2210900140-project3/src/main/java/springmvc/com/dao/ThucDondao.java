@@ -20,8 +20,10 @@ public class ThucDondao {
     // Thêm món ăn
     public int save(ThucDon td) {
         String sql = "INSERT INTO thucdon (ten_mon, loai, gia, mo_ta, hinh_anh) VALUES (?, ?, ?, ?, ?)";
-        return template.update(sql, td.getTenMon(), td.getDanhMuc(), td.getGia(), td.getMoTa(), td.getHinhAnh()); 
+        return template.update(sql, td.getTenMon(), td.getLoai(), td.getGia(), td.getMoTa(), td.getHinhAnh());
     }
+
+
 
     // Cập nhật món ăn
     public int update(ThucDon td) {
@@ -44,21 +46,27 @@ public class ThucDondao {
     }
 
     // Lấy danh sách tất cả món ăn
+ // Thêm giá vào các phương thức liên quan
+    public int save(ThucDon td) {
+        String sql = "INSERT INTO thucdon (ten_mon, loai, gia, mo_ta, hinh_anh) VALUES (?, ?, ?, ?, ?)";
+        return template.update(sql, td.getTenMon(), td.getLoai(), td.getGia(), td.getMoTa(), td.getHinhAnh());
+    }
+
     public List<ThucDon> getAll() {
         return template.query("SELECT * FROM thucdon", new RowMapper<ThucDon>() {
             public ThucDon mapRow(ResultSet rs, int rowNum) throws SQLException {
                 ThucDon td = new ThucDon();
                 td.setId(rs.getInt("id"));
                 td.setTenMon(rs.getString("ten_mon"));
-                td.setDanhMuc(rs.getString("danh_muc"));
-                
+                td.setLoai(rs.getString("loai")); // Lấy loại món ăn
+                td.setGia(rs.getDouble("gia"));
                 td.setMoTa(rs.getString("mo_ta"));
                 td.setHinhAnh(rs.getString("hinh_anh"));
-               
                 return td;
             }
         });
     }
+
 
     // Lấy món ăn theo ID
     public ThucDon getById(int id) {

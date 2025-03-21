@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import springmvc.com.beans.ThucDon;
 import springmvc.com.dao.ThucDondao;
@@ -28,16 +29,23 @@ public class ThucDonController {
     // Hiển thị form thêm món ăn
     @GetMapping("/add")
     public String showAddForm(Model model) {
-        model.addAttribute("command", new ThucDon());
-        return "thucdonadd"; // Trả về JSP: /WEB-INF/views/thucdon/add.jsp
+        model.addAttribute("thucDon", new ThucDon()); // Đảm bảo có dòng này
+        return "thucdonadd"; // Trả về trang JSP
     }
+
 
     // Lưu món ăn mới
     @PostMapping("/saveThucDon")
-    public String save(@ModelAttribute("command") ThucDon td) {
+    public String save(@ModelAttribute("thucDon") ThucDon td, RedirectAttributes redirectAttributes) {
+        if (td.getLoai() == null || td.getLoai().isEmpty()) {
+            redirectAttributes.addFlashAttribute("error", "Vui lòng chọn loại món ăn!");
+            return "redirect:/thucdon/add";
+        }
+
         thucDonDao.save(td);
-        return "redirect:/thucdon"; // Quay lại danh sách sau khi thêm
+        return "redirect:/thucdon"; 
     }
+
 
     // Hiển thị form chỉnh sửa món ăn
     @GetMapping("/edit/{id}")

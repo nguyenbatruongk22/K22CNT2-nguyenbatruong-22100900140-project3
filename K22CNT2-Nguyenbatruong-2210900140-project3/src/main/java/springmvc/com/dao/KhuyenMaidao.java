@@ -44,7 +44,7 @@ public class KhuyenMaidao {
             public KhuyenMai mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return new KhuyenMai(
                     rs.getInt("id"),
-                    rs.getString("ten_khuyenmai"),
+                    rs.getString("ten_khuyen_mai"),
                     rs.getString("loai"),
                     rs.getBigDecimal("gia_tri"),
                     rs.getString("mo_ta"),

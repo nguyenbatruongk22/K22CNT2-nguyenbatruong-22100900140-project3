@@ -13,15 +13,36 @@
         <table>
             <tr>
                 <td>Tên món:</td>
-                <td><input type="text"  name="tenMon" /></td>
+                <td><input type="text" name="tenMon" required /></td>
+            </tr>
+           <tr>
+   
+    <tr>
+    <td>Loại:</td>
+    <td>
+        <form:select path="loai" required="true">
+            <form:option value="">-- Chọn loại --</form:option>
+            <form:option value="Khai vị">Khai vị</form:option>
+            <form:option value="Món chính">Món chính</form:option>
+            <form:option value="Tráng miệng">Tráng miệng</form:option>
+        </form:select>
+    </td>
+</tr>
+
+    
+</tr>
+
+            <tr>
+                <td>Giá:</td>
+                <td><input type="number" name="gia" required /></td>
             </tr>
             <tr>
                 <td>Hình ảnh:</td>
-                <td><input type="url" name="fileHinhAnh" /></td>
+                <td><input type="url" name="fileHinhAnh" required /></td>
             </tr>
             <tr>
                 <td>Mô tả:</td>
-                <td><input type="text" path="moTa" /></td>
+                <td><input type="text" name="moTa" required /></td>
             </tr>
             <tr>
                 <td colspan="2">
